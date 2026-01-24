@@ -21,4 +21,7 @@ public class ApiResponse {
         this.data = data;
         this.message = message;
     }
+
+    public ApiResponse(String profileCreatedSuccessfully) {
+    }
 }
