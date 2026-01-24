@@ -42,7 +42,7 @@ dependencies {
 //	testImplementation 'org.springframework.boot:spring-boot-starter-security-oauth2-client-test'
 //	testImplementation 'org.springframework.boot:spring-boot-starter-security-test'
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+//	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
