@@ -41,10 +41,10 @@ public class ProfileResponseDto {
     private String profilePic;
 
     @Schema(description = "Current Address", example = "University of Computer Studies, Mandalay")
-    private String address;
+    private AddressResponseDto address;
 
     @Schema(description = "Region name", example = "Yangon")
-    private String region;
+    private RegionResponseDto region;
 
 }
 

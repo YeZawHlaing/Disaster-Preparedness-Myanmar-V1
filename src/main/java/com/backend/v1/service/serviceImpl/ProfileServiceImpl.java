@@ -5,6 +5,7 @@ import com.backend.v1.common.storage.StorageService;
 import com.backend.v1.common.storage.StorageServiceFactory;
 import com.backend.v1.config.geocodingConfig.GeocodingService;
 import com.backend.v1.dto.request.ProfileRequestDto;
+import com.backend.v1.dto.response.ProfileResponseDto;
 import com.backend.v1.model.*;
 import com.backend.v1.repository.*;
 import com.backend.v1.service.ProfileService;
@@ -127,7 +128,25 @@ public class ProfileServiceImpl implements ProfileService {
     }
 
     @Override
-    public ApiResponse getProfileById(Long userId) {
-        return null;
+    public ApiResponse getProfileById(final Long userId) {
+
+        // ✅ Ensure user exists
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
+
+        // ✅ Fetch profile by userId
+        Profile profile = profileRepository.findByUser_Id(user.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Profile not found"));
+
+        // ✅ Map to response DTO
+        ProfileResponseDto responseDto = modelMapper.map(profile, ProfileResponseDto.class);
+
+        return ApiResponse.builder()
+                .success(1)
+                .code(200)
+                .data(responseDto)
+                .message("Profile fetched successfully")
+                .build();
     }
+
 }

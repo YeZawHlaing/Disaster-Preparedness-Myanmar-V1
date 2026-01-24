@@ -31,4 +31,14 @@ public ResponseEntity<?> createProfile(
     return ResponseEntity.ok(profileService.createProfile(userId, dto));
 }
 
+    @GetMapping("/{userId}")
+    public ApiResponse getProfileByUserId(
+            @PathVariable Long userId
+    ) {
+        return profileService.getProfileById(userId);
+    }
+
+
+
+
 }
