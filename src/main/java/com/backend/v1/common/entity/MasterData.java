@@ -23,26 +23,26 @@ public abstract class MasterData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreatedDate
-    @Column(
-            nullable = false,
-            updatable = false
-    )
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate
-    @Column(insertable = false)
-    private LocalDateTime updatedAt;
-
-    @Column
-    private LocalDateTime deletedAt;
+//    @CreatedDate
+//    @Column(
+//            nullable = false,
+//            updatable = false
+//    )
+//    private LocalDateTime createdAt;
+//
+//    @LastModifiedDate
+//    @Column(insertable = false)
+//    private LocalDateTime updatedAt;
+//
+//    @Column
+//    private LocalDateTime deletedAt;
 
     @Column
     @Convert(converter = StatusConverter.class)
     private Status status = Status.ACTIVE;
 
-    public void delete() {
-        this.setStatus(Status.INACTIVE);
-        this.setDeletedAt(LocalDateTime.now());
-    }
+//    public void delete() {
+//        this.setStatus(Status.INACTIVE);
+//        this.setDeletedAt(LocalDateTime.now());
+//    }
 }
