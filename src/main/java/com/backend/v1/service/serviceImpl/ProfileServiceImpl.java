@@ -130,15 +130,12 @@ public class ProfileServiceImpl implements ProfileService {
     @Override
     public ApiResponse getProfileById(final Long userId) {
 
-        // ✅ Ensure user exists
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("User not found"));
 
-        // ✅ Fetch profile by userId
         Profile profile = profileRepository.findByUser_Id(user.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Profile not found"));
 
-        // ✅ Map to response DTO
         ProfileResponseDto responseDto = modelMapper.map(profile, ProfileResponseDto.class);
 
         return ApiResponse.builder()
