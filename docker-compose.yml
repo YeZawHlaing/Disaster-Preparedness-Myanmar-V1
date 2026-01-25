@@ -1,0 +1,26 @@
+services:
+  mysql:
+    image: mysql/mysql-server:8.0
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: Disaster
+      MYSQL_USER: yzh
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+networks:
+  backend-network:
+    driver: bridge
+
+volumes:
+  mysql-data:
