@@ -32,4 +32,7 @@ public class Address extends MasterData {
     @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
     private Profile profile;
 
+    @OneToOne(mappedBy = "address", cascade = CascadeType.ALL)
+    private Coordinates coordinates;
+
 }

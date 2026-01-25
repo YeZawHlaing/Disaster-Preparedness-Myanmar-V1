@@ -18,9 +18,8 @@ import lombok.Setter;
 public class Region extends MasterData {
 
     @Column
-    private String region_name;
+    private String name;
 
     @OneToOne(mappedBy = "region", cascade = CascadeType.ALL)
     private Profile profile;
-
 }

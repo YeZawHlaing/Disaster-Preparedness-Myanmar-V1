@@ -18,44 +18,33 @@ import java.time.LocalDate;
 public class Profile extends MasterData {
 
     @Column(nullable = false)
-    private String full_name;
+    private String fullName;
 
-    @Column(unique = true,nullable = false)
+    @Column(unique = true, nullable = false)
     private String contact;
 
     @Column(nullable = false)
     private LocalDate dob;
 
-    @Column
-    private String social_url;
+    private String socialUrl;
 
-    @Column
-    private String profile_pic;
+    private String profilePic;
 
-    @Column
     private String gender;
 
-    @Column(nullable = false,unique = true)
-    private String NRC;
+    @Column(nullable = false, unique = true)
+    private String nrc;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
     private User user;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
     @JoinColumn(name = "address_id")
     private Address address;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
     @JoinColumn(name = "region_id")
     private Region region;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    @JoinColumn(name = "location_id")
-    private Location location;
-
 
 }

@@ -25,9 +25,4 @@ public class Location extends MasterData {
     @Column
     private BigDecimal serve_area;
 
-    @OneToOne(mappedBy = "location", cascade = CascadeType.ALL)
-    private Profile profile;
-
-    @OneToOne(mappedBy = "location", cascade = CascadeType.ALL)
-    private Coordinates coordinates;
 }

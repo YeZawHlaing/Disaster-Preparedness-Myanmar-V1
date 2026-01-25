@@ -17,15 +17,20 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Coordinates extends MasterData {
 
-    @Column(precision = 10, scale = 8)
-    private BigDecimal latitude;
+    @Column(nullable = false)
+    private Double latitude;
 
-    @Column(name = "`longitude`", precision = 11, scale = 8)
-    private BigDecimal longitude;
+    @Column(nullable = false)
+    private Double longitude;
+
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    @JoinColumn(name = "location_id")
-    private Location location;
+    @JoinColumn(name = "address_id")
+    private Address address;
 
+    public Coordinates(double lat, double lon) {
+        this.latitude = lat;
+        this.longitude = lon;
+    }
 }
