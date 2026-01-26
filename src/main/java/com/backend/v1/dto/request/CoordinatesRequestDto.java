@@ -9,9 +9,8 @@ import lombok.Setter;
 public class CoordinatesRequestDto {
 
     private double latitude;
-
     private double longitude;
 
-//    private AddressRequestDto addressRequestDto;
+    private AddressRequestDto addressRequestDto;
 
 }
