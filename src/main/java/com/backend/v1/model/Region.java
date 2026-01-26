@@ -22,4 +22,7 @@ public class Region extends MasterData {
 
     @OneToOne(mappedBy = "region", cascade = CascadeType.ALL)
     private Profile profile;
+
+    @OneToOne(mappedBy = "region", cascade = CascadeType.ALL)
+    private Organization organization;
 }

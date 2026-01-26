@@ -23,10 +23,7 @@ public class Coordinates extends MasterData {
     @Column(nullable = false)
     private Double longitude;
 
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    @JoinColumn(name = "address_id")
+    @OneToOne(mappedBy = "coordinates", cascade = CascadeType.ALL)
     private Address address;
 
     public Coordinates(double lat, double lon) {

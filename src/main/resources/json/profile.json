@@ -1,0 +1,18 @@
+{
+  "status":1,
+  "fullName": "U Tan",
+  "nrc": "12/Takana(N)123456",
+  "contact": "09123456789",
+  "dob": "1990-01-01",
+  "gender": "MALE",
+  "socialUrl": "https://github.com/YeZawHlaing/",
+  "address": {
+    "city": "Yangon",
+    "township": "Hlaing",
+    "road": "Insein Road",
+    "street": "No.123"
+  },
+  "region": {
+    "name": "Yangon"
+  }
+}
