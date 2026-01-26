@@ -20,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
 //    private final PasswordEncoder passwordEncoder;
+
 
     @Transactional
     public ApiResponse createUser(UserCreatedRequestDto request) {
@@ -61,4 +63,11 @@ public class UserServiceImpl implements UserService {
     public PaginatedApiResponse<UserResponseDto> getAllUsers(GetAllUserRequest getAllUserRequest) {
         return null;
     }
+
+    @Override
+    public Optional<User> getUserByEmail(String email) {
+            return userRepository.findByEmail("email");
+    }
+
+
 }

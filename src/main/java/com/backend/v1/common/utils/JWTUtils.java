@@ -14,9 +14,9 @@ import java.util.Map;
 public class JWTUtils {
 
     @Value("${jwt.secret.key}")
-    private String jwtSecretKey;
+    private static String jwtSecretKey;
 
-    public String generate(Long expiresAfterInMinutes, Map<String, String> payload) throws IllegalArgumentException, JwtException {
+    public static String generate(Long expiresAfterInMinutes, Map<String, String> payload) throws IllegalArgumentException, JwtException {
 
         SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
 
@@ -36,7 +36,7 @@ public class JWTUtils {
         return jwtToken;
     }
 
-    public Claims validate(String jwtToken) throws JwtException{
+    public static Claims validate(String jwtToken) throws JwtException{
 
         SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecretKey.getBytes(StandardCharsets.UTF_8));
         var claims = Jwts.parserBuilder()
