@@ -10,7 +10,11 @@
     "city": "Yangon",
     "township": "Hlaing",
     "road": "Insein Road",
-    "street": "No.123"
+    "street": "No.123",
+    "coordinates": {
+      "latitude": "",
+      "longitude": ""
+    }
   },
   "region": {
     "name": "Yangon"
