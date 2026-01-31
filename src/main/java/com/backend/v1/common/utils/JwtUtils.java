@@ -30,7 +30,7 @@ public class JwtUtils {
                 .add(claims)
                 .subject("Jwt token generation")
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 10))
+                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 40))
                 .and()
                 .signWith(getKey())
                 .compact();

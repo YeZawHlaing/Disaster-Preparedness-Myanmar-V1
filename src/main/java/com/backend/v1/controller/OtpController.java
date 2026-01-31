@@ -4,8 +4,8 @@ import com.backend.v1.common.response.ApiResponse;
 import com.backend.v1.common.utils.EmailDetails;
 import com.backend.v1.common.utils.OtpUtils;
 import com.backend.v1.common.utils.ResponseUtils;
-import com.backend.v1.dto.OtpRequestDto;
-import com.backend.v1.dto.OtpValidateRequestDto;
+import com.backend.v1.dto.response.OtpRequestDto;
+import com.backend.v1.dto.request.OtpValidateRequestDto;
 import com.backend.v1.exceptions.ExpiredOtpCodeException;
 import com.backend.v1.exceptions.InvalidOtpCodeException;
 import com.backend.v1.service.EmailService;
@@ -52,8 +52,6 @@ public class OtpController {
                 .build();
         return ResponseUtils.buildResponse(request, response);
     }
-
-
 
     @PostMapping("/generate")
     public ApiResponse getOtpCode(@RequestBody OtpRequestDto otpRequestDto){

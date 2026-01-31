@@ -1,4 +1,4 @@
-package com.backend.v1.dto;
+package com.backend.v1.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,10 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OtpValidateRequestDto {
+@Builder
+public class OtpRequestDto {
     private String email;
-    private String otpCode;
 }

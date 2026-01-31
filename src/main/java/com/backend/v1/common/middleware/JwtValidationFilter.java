@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
@@ -28,7 +29,10 @@ public class JwtValidationFilter extends OncePerRequestFilter {
 
                 var authenticationToken = new UsernamePasswordAuthenticationToken(email, null, AuthorityUtils.commaSeparatedStringToAuthorityList(role));
 
-                filterChain.doFilter(request, response);
+
+                SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+
 
             } catch (JwtException e) {
                 System.out.println(e.getMessage());
@@ -38,13 +42,15 @@ public class JwtValidationFilter extends OncePerRequestFilter {
             } catch (IllegalArgumentException e) {
                 throw new RuntimeException(e);
             }
-            filterChain.doFilter(request, response);
+            finally {
+                filterChain.doFilter(request, response);
+            }
         }
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        if(request.getRequestURI().endsWith("/validate")){
+        if(request.getRequestURI().endsWith("/hello")){
             System.out.println(request.getRequestURI());
             return false;
         }

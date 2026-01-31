@@ -64,6 +64,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(authorize -> {
 //            authorize.requestMatchers("/backend/users/**").permitAll();
+            authorize.requestMatchers("/hello").hasRole("admin");
             authorize.anyRequest().permitAll();
         });
 

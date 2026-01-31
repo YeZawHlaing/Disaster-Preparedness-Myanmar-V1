@@ -2,8 +2,7 @@ package com.backend.v1.controller;
 
 import com.backend.v1.common.response.ApiResponse;
 import com.backend.v1.common.utils.JwtUtils;
-import com.backend.v1.common.utils.OtpUtils;
-import com.backend.v1.dto.LoginSuccessResponseDto;
+import com.backend.v1.dto.response.LoginSuccessResponseDto;
 import com.backend.v1.dto.request.LoginRequestDto;
 import io.jsonwebtoken.JwtException;
 import lombok.AllArgsConstructor;
