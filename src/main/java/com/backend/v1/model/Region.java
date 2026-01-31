@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Region extends MasterData {
 
-    @Column
+    @Column(name = "name",nullable = false)
     private String name;
 
     @OneToOne(mappedBy = "region", cascade = CascadeType.ALL)
