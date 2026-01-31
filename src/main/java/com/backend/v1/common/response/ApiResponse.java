@@ -23,5 +23,6 @@ public class ApiResponse {
     }
 
     public ApiResponse(String profileCreatedSuccessfully) {
+
     }
 }

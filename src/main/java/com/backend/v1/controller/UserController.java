@@ -31,25 +31,4 @@ public class UserController {
             final ApiResponse response = this.userService.createUser(userRequest);
             return ResponseUtils.buildResponse(request, response);
     }
-
-
-    @PostMapping("/api/auth/login")
-    public ResponseEntity<ApiResponse> loginUser(@RequestBody final LoginRequestDto requestDto){
-        String email = requestDto.getEmail();
-        String password = requestDto.getPassword();
-
-        String jwt = null;
-
-        Authentication authentication = UsernamePasswordAuthenticationToken.unauthenticated(email, password);
-        var authenticationResponse =  authenticationManager.authenticate(authentication);
-
-        if(authenticationResponse != null && authenticationResponse.isAuthenticated()){
-
-        }
-
-    }
-
-
-
-
 }

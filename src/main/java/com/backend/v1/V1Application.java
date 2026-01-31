@@ -1,5 +1,8 @@
 package com.backend.v1;
 
+import com.backend.v1.common.utils.EmailDetails;
+import com.backend.v1.common.utils.OtpUtils;
+import com.backend.v1.service.EmailService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class V1Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(V1Application.class, args);
+		var context = SpringApplication.run(V1Application.class, args);
 	}
 
 }

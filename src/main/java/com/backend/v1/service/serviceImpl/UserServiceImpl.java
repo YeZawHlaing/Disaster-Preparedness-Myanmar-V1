@@ -16,7 +16,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -29,13 +29,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Transactional
     public ApiResponse createUser(UserCreatedRequestDto request) {
 
-        Role role = roleRepository.findByName("USER")
+        Role role = roleRepository.findByName(request.getRole())
                 .orElseThrow(() -> new EntityNotFoundException("Default role USER not found."));
 
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = new User();
         user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword()); // encode later if needed
+        user.setPassword(passwordEncoder.encode(request.getPassword())); // encode later if needed
         user.setRole(role);
 
         userRepository.save(user);
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-            return userRepository.findByEmail("email");
+            return userRepository.findByEmail(email);
     }
 
 

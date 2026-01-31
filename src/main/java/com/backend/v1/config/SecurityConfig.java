@@ -1,15 +1,14 @@
 package com.backend.v1.config;
 
+import com.backend.v1.authExceptionHandler.CustomAuthenticationExceptionHandler;
 import com.backend.v1.authProviders.CustomUsernamePasswordAuthenticationProvider;
-import com.backend.v1.common.midddleware.JwtGenerationFilter;
-import com.backend.v1.common.midddleware.JwtValidationFilter;
+import com.backend.v1.common.middleware.JwtValidationFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import org.jspecify.annotations.Nullable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,8 +22,6 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Arrays;
 import java.util.Collections;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class SecurityConfig {
@@ -39,7 +36,7 @@ public class SecurityConfig {
         CustomUsernamePasswordAuthenticationProvider authenticationProvider = new CustomUsernamePasswordAuthenticationProvider(userDetailsService, passwordEncoder);
 
         ProviderManager providerManager = new ProviderManager(authenticationProvider);
-        providerManager.setEraseCredentialsAfterAuthentication(false);
+//        providerManager.setEraseCredentialsAfterAuthentication(false);
 
         return providerManager;
 
@@ -54,15 +51,20 @@ public class SecurityConfig {
             smc.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         });
 
+        http.addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class);
+
 //        http.requiresChannel(config -> {
 //            config.anyRequest().requiresSecure();
 //        });
 
-        http.addFilterAfter(new JwtGenerationFilter(), BasicAuthenticationFilter.class);
-        http.addFilterBefore(new JwtValidationFilter(), BasicAuthenticationFilter.class);
+        http.exceptionHandling(config -> {
+            config.authenticationEntryPoint(new CustomAuthenticationExceptionHandler());
+        });
+
 
         http.authorizeHttpRequests(authorize -> {
-            authorize.anyRequest().authenticated();
+//            authorize.requestMatchers("/backend/users/**").permitAll();
+            authorize.anyRequest().permitAll();
         });
 
         http.cors(cc -> {
