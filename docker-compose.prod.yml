@@ -29,7 +29,8 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: prod
     depends_on:
-      - mysql   # wait-for-it.sh will handle the actual waiting
+      mysql:
+        condition: service_healthy
     networks:
       - backend-network
 
