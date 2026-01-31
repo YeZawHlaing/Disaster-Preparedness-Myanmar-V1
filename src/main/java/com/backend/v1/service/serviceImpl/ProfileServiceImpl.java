@@ -5,6 +5,7 @@ import com.backend.v1.common.storage.StorageService;
 import com.backend.v1.common.storage.StorageServiceFactory;
 import com.backend.v1.config.geocodingConfig.GeocodingService;
 import com.backend.v1.dto.request.ProfileRequestDto;
+import com.backend.v1.dto.response.CoordinatesResponseDto;
 import com.backend.v1.dto.response.ProfileResponseDto;
 import com.backend.v1.model.*;
 import com.backend.v1.repository.*;
@@ -112,9 +113,7 @@ public class ProfileServiceImpl implements ProfileService {
         return new ApiResponse("Profile created successfully");
     }
 
-
     //end
-
     @Override
     public ApiResponse softDeleteProfile(Long userId) {
         return null;
@@ -134,8 +133,20 @@ public class ProfileServiceImpl implements ProfileService {
         Profile profile = profileRepository.findByUser_Id(user.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Profile not found"));
 
-        ProfileResponseDto responseDto = modelMapper.map(profile, ProfileResponseDto.class);
+        ProfileResponseDto responseDto =
+                modelMapper.map(profile, ProfileResponseDto.class);
 
+        if (profile.getAddress() != null &&
+                profile.getAddress().getCoordinates() != null) {
+
+            Coordinates coordinates = profile.getAddress().getCoordinates();
+
+            CoordinatesResponseDto coordinatesDto = new CoordinatesResponseDto();
+            coordinatesDto.setLatitude(coordinates.getLatitude());
+            coordinatesDto.setLongitude(coordinates.getLongitude());
+
+            responseDto.getAddress().setCoordinates(coordinatesDto);
+        }
         return ApiResponse.builder()
                 .success(1)
                 .code(200)
