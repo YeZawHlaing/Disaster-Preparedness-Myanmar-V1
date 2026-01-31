@@ -1,7 +1,6 @@
 package com.backend.v1.model;
 
 import com.backend.v1.common.entity.MasterData;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,25 +16,31 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Profile extends MasterData {
+public class Organization extends MasterData {
 
-    @Column(nullable = false)
-    private String fullName;
+    @Column
+    private String name;
 
     @Column(unique = true, nullable = false)
-    private String contact;
+    private String SOS;
+
+    @Column
+    private String profile_pic;
+
+    @Column
+    private String social_url;
 
     @Column(nullable = false)
-    private LocalDate dob;
+    private LocalDate founded_year;
 
-    private String socialUrl;
+    @Column
+    private String description;
 
-    private String profilePic;
+    @Column(nullable = false)
+    private String service_type;
 
-    private String gender;
-
-    @Column(nullable = false, unique = true)
-    private String nrc;
+    @Column
+    private String mission_statement;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false, unique = true)
@@ -49,6 +54,15 @@ public class Profile extends MasterData {
     @JoinColumn(name = "region_id")
     private Region region;
 
-    @OneToOne(mappedBy = "profile", cascade = CascadeType.ALL)
-    private Report report;
+    @OneToMany(
+            mappedBy = "organization",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<Achievement> achievements = new ArrayList<>();
+
+
+
+
 }

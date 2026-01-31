@@ -27,8 +27,6 @@ public class ProfileServiceImpl implements ProfileService {
     private final RoleRepository roleRepository;
     private final CoordinateRepository coordinateRepository;
     private final RegionRepository regionRepository;
-    private final LocationRepository locationRepository;
-
 
     private final ModelMapper modelMapper;
     private StorageService storageService;
