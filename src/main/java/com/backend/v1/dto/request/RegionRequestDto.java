@@ -10,5 +10,6 @@ public class RegionRequestDto {
 
     @NotBlank(message = "Region name is required")
     private String name;
+
 }
 
