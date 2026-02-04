@@ -1,7 +1,12 @@
-CREATE TABLE roles (
-                       id BIGINT PRIMARY KEY AUTO_INCREMENT,
-                       name VARCHAR(50) NOT NULL UNIQUE
+CREATE TABLE role (
+                      id BIGINT NOT NULL AUTO_INCREMENT,
+                      name VARCHAR(255) NOT NULL,
+                      status VARCHAR(50) NOT NULL DEFAULT 'ACTIVE',
+
+                      CONSTRAINT pk_role PRIMARY KEY (id),
+                      CONSTRAINT uk_role_name UNIQUE (name)
 );
+
 
 CREATE TABLE user (
                        id BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -10,7 +15,7 @@ CREATE TABLE user (
                        role_id BIGINT NOT NULL,
                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                        CONSTRAINT fk_user_role
-                           FOREIGN KEY (role_id) REFERENCES roles(id)
+                           FOREIGN KEY (role_id) REFERENCES role(id)
 );
 
 CREATE TABLE coordinates (
